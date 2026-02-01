@@ -8,7 +8,6 @@ seller-us.tiktok.com	FALSE	/sw-config.json	FALSE	1770274437	gd_random	eyJwZXJjZW
 seller-us.tiktok.com	FALSE	/sw-backend.js	FALSE	1770274734	gd_random	eyJtYXRjaCI6dHJ1ZSwicGVyY2VudCI6MC4yODQ1Njc0MDMzNjkyNzc0NH0=.VyYMvo0jNWBr/M5vGwmXRphCphdwzpykcKi7P7P1NsY=
 seller-us.tiktok.com	FALSE	/sw-inject.js	FALSE	1770274437	gd_random	eyJtYXRjaCI6dHJ1ZSwicGVyY2VudCI6MC4yNDU3ODY4NzkxMjc0NjY4OH0=.6qqKadds5falUb7EVfXTSovoVfU2ADYGvsd9hu8c49k=
 seller-us.tiktok.com	FALSE	/university	FALSE	1770181667	gd_random	eyJtYXRjaCI6dHJ1ZSwicGVyY2VudCI6MC4xMTU0NDU1NTUwNjE4MzEzfQ==.qu92GeOv7Nf9zHNTZXuPGsSdWTXeN8rdJIxuP5pt1SU=
-seller-us.tiktok.com	FALSE	/	FALSE	1769908025	gd_random	eyJwZXJjZW50IjowLjk5MDU0NjEzNzk3NjQxNzN9.YKD%2BGzeeJ47A%2BZkpKR3B3v13mGEXYMSPlC9v2wwzQkU%3D
 seller-us.tiktok.com	FALSE	/	FALSE	1801205637	i18next	en
 seller-us.tiktok.com	FALSE	/	FALSE	1772261639	gs_seller_type_for_report	pop
 seller-us.tiktok.com	FALSE	/	TRUE	1801195152	ATLAS_LANG	en
@@ -107,11 +106,11 @@ m.stripe.com	FALSE	/	TRUE	1804400156	m	6eb818b1-53ea-4fd3-a374-5fa7072abc1e6f964
 .youtube.com	TRUE	/	TRUE	1804036356	__Secure-1PAPISID	4hrNnOgRhWdAj1NA/AH8QkM8rMxQwqYA8p
 .youtube.com	TRUE	/	TRUE	1804036356	__Secure-3PAPISID	4hrNnOgRhWdAj1NA/AH8QkM8rMxQwqYA8p
 .youtube.com	TRUE	/	FALSE	1804463637	ab.storage.sessionId.f9c2b69f-2136-44e0-a55a-dff72d99aa19	g%3A89446102-3e4e-76ae-46bb-3cdb069949fe%7Ce%3A1769905437967%7Cc%3A1769903637968%7Cl%3A1769903637968
-.youtube.com	TRUE	/	FALSE	1801443538	SIDCC	AKEyXzWXxQIdv4GQnBNQP3Fk0nLIWLuK2vWfHdXePHd5TIYj4WSSBE_fCqAeq17DnU_JDzVPFM0
-.youtube.com	TRUE	/	TRUE	1801443538	__Secure-1PSIDCC	AKEyXzUoZG1LmqplP-v30kVW0GltbH0e9KA-1Z15h3R8HpEjucJHWFXup5egBwfJRzbW3krw2Z8
-.youtube.com	TRUE	/	TRUE	1801443538	__Secure-3PSIDCC	AKEyXzUQb_5Yw-MCyEOCklAp6_xnxEEn8caKConKXh9yrgk0rw47KwqPpOf1En5cQ5Uw2JasDA
-.youtube.com	TRUE	/	TRUE	1785459538	VISITOR_INFO1_LIVE	_k-5kLgf8Jc
-.youtube.com	TRUE	/	TRUE	1785459538	VISITOR_PRIVACY_METADATA	CgJVUxIEGgAgYg%3D%3D
+.youtube.com	TRUE	/	FALSE	1801448953	SIDCC	AKEyXzXuFkIC9PF5kPDI2vfqlTFFwO1XxPudj1ntlrxQ7CqPYXGGTUA_gXRSLSSZ0fJJ5nI6W3o
+.youtube.com	TRUE	/	TRUE	1801448953	__Secure-1PSIDCC	AKEyXzXpJ4Ag_E0GROtCgxt6Kn149yzKMTQKFKx0FvrbKptpwLWX-dzBFfLZEaFWPcHh4XZJJe4
+.youtube.com	TRUE	/	TRUE	1801448953	__Secure-3PSIDCC	AKEyXzXbewpBtzF0VnNKOX3grw8p1HkRa8KVekXreL9cdUguJCytHkBwjNq4iUEyfrFPU-UUHw
+.youtube.com	TRUE	/	TRUE	1785464953	VISITOR_INFO1_LIVE	_k-5kLgf8Jc
+.youtube.com	TRUE	/	TRUE	1785464953	VISITOR_PRIVACY_METADATA	CgJVUxIEGgAgYg%3D%3D
 .youtube.com	TRUE	/	TRUE	1785394292	__Secure-YNID	15.YT=Bqa1Cu7D9B5T8icLF9xk7vxvboZxPTnVuFxboJyKM9Ubiw4oNKYBgUxg4vYPglivNzg6HLUNYL6eQY3wPXIrWEJSNFb5-kK-_J4JsQHqbib49_GJC6QpYR4ut1BIZnBZbtHnZHaYEMPo6Ep6tAjkrojWo6hafbCcLE3864GQwqW7JmCSG5RyEcil99pF9J64OkpuzDnVBB-WRBeBwP0G0udTkZCGvDfVfMOitf0xJUR8BWad75wdPy-k-P7hmcB-ev1PxnEKjPA0eNkVcEg52bFznW0mwWKthC88fJPu4lq_cfxMKhokg_B0j2MT_DSPUivKFbrCEsHOgVbJJO52lQ
 .youtube.com	TRUE	/	TRUE	1785394292	__Secure-ROLLOUT_TOKEN	CIvRrOSLyaO40gEQ45ikuuGYkgMYm9OUqZi1kgM%3D
 .youtube.com	TRUE	/	TRUE	0	YSC	ksM-E2YcrQ4
@@ -390,7 +389,6 @@ linkinghub.elsevier.com	FALSE	/	FALSE	1804124637	visitorId	amZm63UL3VV4hQKbDCrh
 www.semanticscholar.org	FALSE	/	FALSE	1804124665	tid	rBIABml5afmFkQANA572Ag==
 www.semanticscholar.org	FALSE	/	FALSE	1801100666	s2Exp	new_ab_framework_aa%3D-control%26pdp_citation_and_reference_paper_cues%3D-enable_citation_and_reference_paper_cues%26venues%3D-enable_venues%26reader_link_styling%3D-control%26topics_beta3%3D-topics_beta3%26alerts_aa_test%3D-control%26personalized_author_card_cues%3D-control%26term_understanding%3D-control%26aa_user_based_test%3D-control%26paper_cues%3D-all_paper_cues%26new_ab_framework_mock_ab%3D-control%26aa_stable_hash_session_test%3Dcontrol
 www.semanticscholar.org	FALSE	/	FALSE	1785116666	g_state	{"i_l":0,"i_ll":1769564666447,"i_b":"trMbScQek7L04gfAb6UOXMKH4itJUE6jLwJX2RAFkog","i_e":{"enable_itp_optimization":3}}
-.www.semanticscholar.org	TRUE	/	TRUE	1769910265	aws-waf-token	68223fed-0150-4bda-92d2-52b232fdc3bc:EQoAmY0MOHgBAAAA:JJ/6lY9D+zTmSVRcsi6WTeSAaGxqNHC6qxr/ZL/s1wud8pDYmX/7Q0WCiDbpXHvBanqqH4Nacwvdn5UL2d+os3pOG+xds5MqCrEufRhbmO8rKR0nn0HngAc+mYCgera2LYrKxI/diUdgYHGiYyWMRqVShwOejEXr+sS2lw///aqQ1ljOR3Nt56nvr+SZ6hKsTkIkqT2xk2jqig==
 lens.google.com	FALSE	/	TRUE	1804131405	OSID	g.a0006AiOKM9qGFYXvnCRSBA-aPYMwg0b-wpuZbgyTG2smSsHDIH2qlbPBo7vQyEjCe6yQZCGKwACgYKAVASARASFQHGX2MieLRKko-brbgd0ZnzZappxxoVAUF8yKo9kR3CyZk_37oDCyNSRnf50076
 lens.google.com	FALSE	/	TRUE	1804131405	__Secure-OSID	g.a0006AiOKM9qGFYXvnCRSBA-aPYMwg0b-wpuZbgyTG2smSsHDIH2q7DpfPKcG8yyn2ET49W48AACgYKAVMSARASFQHGX2Mib_i6j5Qlgce3xB3v5VIC9BoVAUF8yKpmSivu1xMEUno_3xOovGcp0076
 .www.greenpeace.org	TRUE	/	TRUE	1801108300	greenpeace	1
