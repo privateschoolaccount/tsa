@@ -1,0 +1,3 @@
+type YoutubeVideo = {
+    id:string;
+}
