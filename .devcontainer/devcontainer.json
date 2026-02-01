@@ -8,6 +8,5 @@
 				"denoland.vscode-deno"
 			]
 		}
-	},
-	"postCreateCommand": "bash install_dependencies.sh"
+	}
 }
