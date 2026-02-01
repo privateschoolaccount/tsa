@@ -78,12 +78,18 @@ async function saveTextToTemp(text:string,folder:string,ext:string){
 }
 async function convertTextToBraille(text:string,table:string="en-ueb-g2.ctb",cellsPerLine:number=40,linesPerPage:number=25,formatFor:string="textDevice"){
     const textPath = await saveTextToTemp(text,"text","txt");
-    const format = formatFor == "textDevice" ? "brf" : "brl";
-    const braillePath = `./temp/${format}/${crypto.randomUUID()}.${format}`;
+
+    const braillePath = `./temp/brf/${crypto.randomUUID()}.brf`;
     await (new Deno.Command("file2brl",{
         args:[
             "-C",
-            `"literaryTextTable=${table},cellsPerLine=${cellsPerLine},linesPerPage=${linesPerPage},formatFor=${formatFor}"`,
+            `cellsPerLine=${cellsPerLine}`,
+            "-C",
+            `linesPerPage=${linesPerPage}`,
+            "-C",
+            `literaryTextTable=${table}`,
+            "-C",
+            `formatFor=${formatFor}`,
             textPath,
             braillePath
         ],
@@ -93,7 +99,7 @@ async function convertTextToBraille(text:string,table:string="en-ueb-g2.ctb",cel
     })).output()
     return braillePath;
 }
-const captionsPath = await getCaptionsYouTube({ id: "AmC9SmCBUj4" });
+const captionsPath = await getCaptionsYouTube({ id: "_uqlYtgRZXY" });
 
 const captionsText = convertSRTToText(captionsPath);
 const recipe = await createRecipeCard(captionsText);
