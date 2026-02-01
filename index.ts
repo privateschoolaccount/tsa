@@ -30,7 +30,7 @@ async function getCaptionsYouTube(video: YoutubeVideo) {
         output: captionsPath,
         convertSubs:"srt"
     })).exec();*/
-    await new Deno.Command("yt-dlp",{
+    await (new Deno.Command("yt-dlp",{
         args:[
             "--skip-download",
             "-o",
@@ -45,14 +45,14 @@ async function getCaptionsYouTube(video: YoutubeVideo) {
         stdin:"inherit",
         stdout:"inherit",
         stderr:"inherit"
-    }).output();
-    await new Deno.Command("ffmpeg",{
+    })).output();
+    await (new Deno.Command("ffmpeg",{
         args:[
             "-i",
             captionsPath+".en.vtt",
             captionsPath+".en.srt"
         ]
-    }).output()
+    })).output()
     //const convertCommand = new Deno.Command("ffmpeg")
     return captionsPath+".en.srt";
 }
@@ -65,14 +65,39 @@ async function createRecipeCard(text: string){
     const recipe = (await genAI.models.generateContent({
         model:"gemini-2.5-flash-lite",
         contents:`
-        Generate a quick recipe card for this AI transcript of a cooking video. use simple language:
+        Generate a quick recipe card for this AI transcript of a cooking video. only use alphanumeric characters and newlines:
         ${text}
         `
     })).text;
     return recipe;
 }
+async function saveTextToTemp(text:string,folder:string,ext:string){
+    const path = `./temp/${folder}/${crypto.randomUUID()}.${ext}`
+    await Deno.writeTextFile(path,text);
+    return path;
+}
+async function convertTextToBraille(text:string,table:string="en-ueb-g2.ctb",cellsPerLine:number=40,linesPerPage:number=25,formatFor:string="textDevice"){
+    const textPath = await saveTextToTemp(text,"text","txt");
+    const format = formatFor == "textDevice" ? "brf" : "brl";
+    const braillePath = `./temp/${format}/${crypto.randomUUID()}.${format}`;
+    await (new Deno.Command("file2brl",{
+        args:[
+            "-C",
+            `"literaryTextTable=${table},cellsPerLine=${cellsPerLine},linesPerPage=${linesPerPage},formatFor=${formatFor}"`,
+            textPath,
+            braillePath
+        ],
+        stdin:"inherit",
+        stdout:"inherit",
+        stderr:"inherit"
+    })).output()
+    return braillePath;
+}
 const captionsPath = await getCaptionsYouTube({ id: "AmC9SmCBUj4" });
 
 const captionsText = convertSRTToText(captionsPath);
 const recipe = await createRecipeCard(captionsText);
+await convertTextToBraille(recipe!);
+
+
 console.log(recipe);
