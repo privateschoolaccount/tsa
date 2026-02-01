@@ -36,6 +36,8 @@ async function getCaptionsYouTube(video: YoutubeVideo) {
             "-o",
             captionsPath,
             "--write-auto-sub",
+            "--remote-components",
+            "ejs:github",
             "--cookies",
             Deno.env.get("COOKIES")!,
             link
@@ -44,6 +46,13 @@ async function getCaptionsYouTube(video: YoutubeVideo) {
         stdout:"inherit",
         stderr:"inherit"
     }).output();
+    await new Deno.Command("ffmpeg",{
+        args:[
+            "-i",
+            captionsPath+".en.vtt",
+            captionsPath+".en.srt"
+        ]
+    }).output()
     //const convertCommand = new Deno.Command("ffmpeg")
     return captionsPath+".en.srt";
 }
@@ -56,13 +65,14 @@ async function createRecipeCard(text: string){
     const recipe = (await genAI.models.generateContent({
         model:"gemini-2.5-flash-lite",
         contents:`
-        Generate a quick recipe card for this AI transcript of a cooking video. use bullet points and simple language:
+        Generate a quick recipe card for this AI transcript of a cooking video. use simple language:
         ${text}
         `
     })).text;
     return recipe;
 }
 const captionsPath = await getCaptionsYouTube({ id: "AmC9SmCBUj4" });
-//const captionsText = convertSRTToText(captionsPath);
-//const recipe = await createRecipeCard(captionsText);
-//console.log("ding");
+
+const captionsText = convertSRTToText(captionsPath);
+const recipe = await createRecipeCard(captionsText);
+console.log(recipe);

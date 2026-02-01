@@ -1,4 +1,4 @@
-FROM debian:bookworm-slim
+FROM ubuntu:22.04
 
 RUN apt-get update && apt-get install -y \
     curl \
@@ -6,14 +6,9 @@ RUN apt-get update && apt-get install -y \
     git \
     ffmpeg \
     libavcodec-dev \
-    python3 \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/*
-
-RUN curl -L https://github.com -o /usr/local/bin/yt-dlp \
-    && chmod a+rx /usr/local/bin/yt-dlp
-
-RUN curl -fsSL https://deno.land | sh
-
-ENV DENO_INSTALL="/root/.deno"
-ENV PATH="$DENO_INSTALL/bin:$PATH"
+    python3
+RUN apt-get install software-properties-common -y
+RUN add-apt-repository ppa:tomtomtom/yt-dlp    # Add ppa repo to apt
+RUN apt-get update                                 # Update package list
+RUN apt-get install yt-dlp -y                        # Install yt-dlp
+RUN curl -fsSL https://deno.land/install.sh | sh -s -- --yes
