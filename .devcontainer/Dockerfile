@@ -1,4 +1,4 @@
-FROM ubuntu:22.04
+FROM mcr.microsoft.com/vscode/devcontainers/universal
 
 
 RUN apt-get install software-properties-common -y
