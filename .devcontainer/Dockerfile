@@ -13,4 +13,4 @@ RUN apt-get update                                 # Update package list
 RUN apt-get install yt-dlp -y                        # Install yt-dlp
 RUN apt-get install liblouis-bin -y
 RUN apt-get install liblouisutdml-bin -y
-RUN curl -fsSL https://deno.land/install.sh | sh -s -- --yes
+#RUN curl -fsSL https://deno.land/install.sh | sh -s -- --yes
