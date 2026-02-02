@@ -1,3 +1,4 @@
 temp
 .env
 *.temp
+node_modules

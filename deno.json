@@ -4,6 +4,8 @@
     "@hono/swagger-ui": "jsr:@hono/swagger-ui@^0.5.3",
     "hono": "npm:hono@^4.11.7",
     "hono-openapi": "npm:hono-openapi@1.2.0",
-    "zod-openapi": "npm:zod-openapi@^5.4.6"
-  }
+    "zod-openapi": "npm:zod-openapi@^4.2.4"
+  },
+  "nodeModulesDir":"auto",
+  "allowScripts": ["npm:protobufjs@7.5.4"]
 }

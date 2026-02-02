@@ -12,9 +12,9 @@ const app = new Hono();
 
 const youtubeQuerySchema = z.object({
     id: z.string(),
-    linesPerPage: z.number(),
-    cellsPerLine: z.number(),
-    table: z.enum(["en-ueb-g2.ctb"]),
+    linesPerPage: z.optional(z.number()),
+    cellsPerLine: z.optional(z.number()),
+    table: z.optional(z.enum(["en-ueb-g2.ctb"])),
 });
 const youtubeResultSchema = z.string();
 app.get(
@@ -26,7 +26,7 @@ app.get(
             200: {
                 description: "Successful recipe card generated",
                 content: {
-                    "text/plain": { schema: resolver(youtubeQuerySchema) },
+                    "text/plain": { schema: resolver(youtubeResultSchema) },
                 },
             },
         },
@@ -37,7 +37,7 @@ app.get(
         const captionsPath = await getCaptionsYouTube({ id:query.id });
         const text = await convertSRTToText(captionsPath);
         const recipe = await createRecipeCard(text);
-        const braillePath = await convertTextToBraille(recipe!);
+        const braillePath = await convertTextToBraille(recipe!,query.table,query.cellsPerLine,query.linesPerPage);
         return c.text(await Deno.readTextFile(braillePath));
     },
 );
