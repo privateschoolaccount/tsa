@@ -32,19 +32,17 @@
         </div>
     </form>
 </main>
-<script>
-    document.getElementById("settingsForm").addEventListener("click",(e)=>{
-        e.preventDefault();
-        const formData = new FormData(e.target);
-        setCookies("cellsPerLine",formData.get("cellsPerLine"),1000);
-        setCookies("linesPerPage",formData.get("linesPerPage"),1000);
-        setCookies("translationTable",formData.get("translationTable"),1000);
-    })
-</script>
+
 <footer>
     <button class="box">Share</button>
-    <a href="/" class="box">Back</a>
+    
+    <a href="{{#if return}} {{return}} {{else}} / {{/if}}" class="box">{{#if return}} {{return}} {{else}} / {{/if}}</a>
 </footer>
+<script>
+    for(const input of document.getElementsByTagName("select")){
+        setCookies(input.name,input.value,1000);
+    }
+</script>
 <style>
     body{
         width:100vw;
