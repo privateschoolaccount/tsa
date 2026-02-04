@@ -14,9 +14,12 @@ const youtubeQuerySchema = z.object({
     id: z.string(),
     linesPerPage: z.optional(z.number()),
     cellsPerLine: z.optional(z.number()),
-    table: z.optional(z.enum(["en-ueb-g2.ctb"])),
+    table: z.optional(z.enum(["en-ueb-g2.ctb","en-ueb-g1.ctb"])),
 });
 const youtubeResultSchema = z.string();
+
+app.get("/") // piss. add pwa
+
 app.get(
     "/api/youtube",
     describeRoute({
