@@ -1,0 +1,112 @@
+<header>
+    <div class="box">Settings</div>
+</header>
+<main>
+    <form id="settingsForm">
+        <div>
+            <label for="cellsPerLine">Cells per Line</label>
+            <select id="cellsPerLine" name="cellsPerLine">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+            </select>
+        </div>
+        <div>
+            <label for="linesPerPage">Lines per page</label>
+            <select id="linesPerPage" name="linesPerPage">
+                <option value="10">10</option>
+                <option value="20">20</option>
+                <option value="30">30</option>
+                <option value="40">40</option>
+            </select>
+        </div>
+        <div>
+            <label for="translationTable">Translation table</label>
+            <select id="translationTable" name="translationTable">
+                <option value="english">english</option>
+                <option value="spanish">spanish</option>
+                <option value="chinese">chinese</option>
+                <option value="french">french</option>
+            </select>
+        </div>
+    </form>
+</main>
+<script>
+    document.getElementById("settingsForm").addEventListener("click",(e)=>{
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        setCookies("cellsPerLine",formData.get("cellsPerLine"),1000);
+        setCookies("linesPerPage",formData.get("linesPerPage"),1000);
+        setCookies("translationTable",formData.get("translationTable"),1000);
+    })
+</script>
+<footer>
+    <button class="box">Share</button>
+    <a href="/" class="box">Back</a>
+</footer>
+<style>
+    body{
+        width:100vw;
+        height:100vh;
+        margin:0;
+        display:grid;
+        grid-template-rows:1fr 4fr 1fr;
+        background-color:white;
+    }
+    main{
+        width:100%;
+        height:100%;
+    }
+    form{
+        width:100%;
+        height:100%;
+        display:grid;
+        grid-template-rows:1fr 1fr 1fr 1fr;
+    }
+    form > div{
+        width:100%;
+        display:grid;
+        grid-template-columns: 1fr 2fr;
+    }
+    label{
+        font-size:3em;
+    }
+    select {
+        font-size:2em;
+    }
+    footer{
+        width;100%;
+        height:100%;
+        display:grid;
+        grid-template-columns:1fr 1fr;
+    }
+    header{
+        display:grid;
+        width:100%;
+        height:100%;
+        grid-template-columns:1fr;
+        grid-template-rows:1fr;
+    }
+    .box{
+        display: grid;
+        place-items:center;
+        justify-content: center;
+        padding: 10px 20px;
+        background-color: #007BFF;
+        color: white;
+        text-decoration: none;
+        border-radius: 5px;
+        text-align: center;
+        font-size: 10vw;
+        border: 2px solid black;
+        font-family: serif;
+    }
+    button.box:hover{
+        background-color: #0056b3;
+        
+    }
+    h1{
+        text-align: center
+    }
+</style>

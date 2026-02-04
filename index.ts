@@ -2,6 +2,9 @@ import { Context, Hono } from "hono";
 import { swaggerUI } from '@hono/swagger-ui'
 import { describeRoute, resolver, validator,openAPIRouteHandler } from "hono-openapi";
 import { z } from "https://deno.land/x/zod@v3.25/mod.ts";
+import { Handlebars, HandlebarsConfig } from 'https://deno.land/x/handlebars/mod.ts';
+
+
 import {
     convertSRTToText,
     convertTextToBraille,
@@ -17,9 +20,31 @@ const youtubeQuerySchema = z.object({
     table: z.optional(z.enum(["en-ueb-g2.ctb","en-ueb-g1.ctb"])),
 });
 const youtubeResultSchema = z.string();
+const handle = new Handlebars({
+  baseDir:"./html",
+  layoutsDir:"layouts/",
+  partialsDir:"partials/",
+  extname:".hbs",
+  defaultLayout:"boilerplate",
+  helpers: undefined,
+  compilerOptions: undefined,
+});
+function defaultCookieMiddleware(c:Context){
+  
 
-app.get("/") // piss. add pwa
-
+}
+app.get("/",async (c)=>{
+  return c.html(await handle.renderView("pages/index"));
+})
+app.get("/settings",async (c)=>{
+  return c.html(await handle.renderView("pages/settings"));
+})
+app.get("/share-target/",async (c)=>{
+  const link = c.req.query("link");
+  //add failure condition
+  const videoId = new URL(link!).searchParams.get("v");
+  return c.html(await handle.renderView("pages/generate",{id:videoId}));
+})
 app.get(
     "/api/youtube",
     describeRoute({

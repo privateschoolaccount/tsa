@@ -7,5 +7,9 @@
     "zod-openapi": "npm:zod-openapi@^4.2.4"
   },
   "nodeModulesDir":"auto",
-  "allowScripts": ["npm:protobufjs@7.5.4"]
+  "allowScripts": ["npm:protobufjs@7.5.4"],
+  "compilerOptions": {
+    "jsx": "precompile",
+    "jsxImportSource": "@hono/hono/jsx"
+  }
 }

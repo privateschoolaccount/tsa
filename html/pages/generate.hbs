@@ -1,0 +1,19 @@
+<form action="/api/youtube" method="GET">
+    <label for="videoId">Video ID</label>
+    <input id="videoId" type="text"/>
+    <a href="/settings?return=%2Fshare-target%3Fid%3D{{id}}"><button role="button">Go to settings</button></a>
+</form>
+
+<style>
+    body{
+        width:100vw;
+        height:100vh;
+        display:grid;
+        place-items:center;
+        justify-content:center;
+    }
+    form{
+        
+        height:min-content;
+    }
+</style>
