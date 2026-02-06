@@ -3,8 +3,10 @@
     <button type="button" id="Right">Right</button>
 </header>
 <main>
-    <h1>Recipe</h1>
-    <txt id="recipe">Hi</txt>
+    <h1 id="recipeName">Recipe</h1>
+    <p id="recipeContent">
+        
+    </p>
 </main>
 <footer>
     <button>Share</button>
@@ -12,25 +14,26 @@
 </footer> 
 <script>
     let currentRecipe = 0;
+    const recipes = JSON.parse(localStorage.getItem("recipeCards"));
     function changeRecipe(){
         
+        document.getElementById("recipeContent").textContent = recipes[currentRecipe].text;
     }
+    changeRecipe();
     const buttonLeft = document.getElementById("Left");
     const buttonRight = document.getElementById("Right");
 
     buttonLeft.addEventListener("click", function() {
-        if (recipe.textContent === "Hi") {
-            recipe.textContent = "Hola";
-        } else {
-            recipe.textContent = "Hi";
+        currentRecipe+=1;
+        if(currentRecipe >= recipes.length-1){
+            currentRecipe=0;
         }
     });
     
     buttonRight.addEventListener("click", function() {
-        if (recipe.textContent === "Hi") {
-            recipe.textContent = "Hola";
-        } else {
-            recipe.textContent = "Hi";
+        currentRecipe-=1;
+        if(currentRecipe <= 0){
+            currentRecipe=recipes.length-1;
         }
     });
 </script>

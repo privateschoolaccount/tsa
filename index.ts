@@ -27,7 +27,7 @@ import {
   createRecipeCard,
   getCaptionsYouTube,
 } from "./utils.ts";
-import { table } from "node:console";
+import { serveStatic } from 'hono/deno'
 const app = new Hono();
 
 const youtubeQuerySchema = z.object({
@@ -192,7 +192,7 @@ app.get(
     },
   }),
 );
-
+app.get('*', serveStatic({root:"./static"}));
 app.get(
   "/docs",
   swaggerUI({

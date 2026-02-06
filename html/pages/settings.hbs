@@ -12,8 +12,8 @@
             <input value="{{linesPerPage}}" id="linesPerPage" name="linesPerPage" type="number"/>
         </div>
         <div>
-            <label for="translationTable">Translation Table</label>
-            <select id="translationTable" name="translationTable">
+            <label for="table">Translation Table</label>
+            <select id="table" name="table">
                 {{#each tableOptions}}
                     <option value="{{this}}" {{#if (eq this table)}}selected{{/if}}>{{this}}</option>
                 {{/each}}
@@ -25,11 +25,15 @@
 <footer>
     <button class="box">Share</button>
     
-    <a href="{{#if return}} {{return}} {{else}} / {{/if}}" class="box">{{#if return}} {{return}} {{else}} / {{/if}}</a>
+    <a href="{{#if return}} {{return}} {{else}} / {{/if}}" class="box">Back</a>
 </footer>
 <script>
-    for(const input of document.getElementsByTagName("select")){
-        setCookies(input.name,input.value,1000);
+    for(const input of [...document.getElementsByTagName("select"),...document.getElementsByTagName("input")]){
+        console.log(input.name,input.value,1000);
+        input.addEventListener("input",()=>{
+            setCookie(input.name,input.value,1000);
+        })
+        
     }
 </script>
 <style>
