@@ -1,15 +1,30 @@
-<form id="generateForm">
-    <label for="id">Video ID</label>
-    <input id="id" name="id" type="text" value="{{id}}"/>
-    <a href="/settings?return=/share-target?text=https%3A%2F%2Fyoutube.com%3Fv%3D{{id}}"><button type="button">Go to settings</button></a>
-    <button>Generate Recipe Card</button>
-    <div id="generationStatus"></div>
-</form>
+
+
+<header>
+    <button type="button" id="home">Home</button>
+</header>
+<main>
+    <form id="generateForm">
+        <div>
+            <label for="id">Video ID</label>
+            <input id="id" name="id" type="text" value="{{id}}"/>
+        </div>
+        
+        
+        <div id="generationStatus"></div>
+    </form>
+</main>
+<footer>
+    <button>Generate</button>
+    <a class="button" href="/settings?return=/share-target/?text=https%3A%2F%2Fyoutube.com%3Fv%3D{{id}}">add title to this href</a>
+</footer> 
 <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const title = urlParams.get("title");
     let generating = false;
     document.getElementById("id").addEventListener("input",function(){
         const id = this.value;
-        document.querySelector("a").href = "/settings?return=/share-target?text=https%3A%2F%2Fyoutube.com%3Fv%3D"+id;
+        document.querySelector("a").href = "/settings?return=/share-target/?text=https%3A%2F%2Fyoutube.com%3Fv%3D"+id=`&title=${title}`;
     })
     document.getElementById("generateForm").addEventListener("submit",(e)=>{
         e.preventDefault();
@@ -32,7 +47,12 @@
         }).then((json)=>{
             const existing = localStorage.getItem("recipeCards") || "[]";
             const existingArray = JSON.parse(existing);
-            existingArray.push(json);
+            
+            existingArray.push({
+                ...json,
+                title:title
+            });
+            
             localStorage.setItem("recipeCards", JSON.stringify(existingArray));
             generating = false;
             document.getElementById("generationStatus").textContent = "Transferring you to recipe cards";
@@ -46,12 +66,84 @@
     body{
         width:100vw;
         height:100vh;
+        margin:0;
         display:grid;
-        place-items:center;
-        justify-content:center;
+        grid-template-rows:1fr 4fr 1fr;
+        background-color:white;
+    }
+    main{
+        width:100%;
+        height:100%;
+        overflow-y:auto;
     }
     form{
+        width:100%;
+        height:100%;
+        display:grid;
+        grid-template-rows:1fr 1fr;
+    }
+    form > div{
+        width:100%;
+        display:grid;
+        grid-template-columns: 1fr 2fr;
+    }
+    #generationStatus{
+        display:block;
+    }
+    label{
+        font-size:3em;
+    }
+    select,input,#generationStatus {
+        font-size:2em;
+    }
+    
+    header,footer{
+        width:100%;
+        height:100%;
+        display:grid;
         
-        height:min-content;
+    }
+
+    header{
+        grid-template-columns:1fr;
+    }
+    footer{
+        grid-template-columns:1fr 1fr;
+    }
+    .button{
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007BFF;
+        color: white;
+        text-decoration: none; underline;
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        font-size: 10vw;
+        border: 2px solid black;
+        font-family: serif;
+    }
+    button{
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007BFF;
+        color: white;
+        text-decoration: none; underline
+        border-radius: 5px;
+        cursor: pointer;
+        text-align: center;
+        font-size: 10vw;
+        border: 2px solid black;
+        font-family: serif;
+    }
+    .button:hover{
+        background-color: #0056b3;
+        
+    }
+    button:hover{
+        background-color: #0056b3;
+    }
+    h1{
+        text-align: center;
     }
 </style>
