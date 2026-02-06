@@ -1,40 +1,43 @@
 
-
 <header>
     <button type="button" id="home">Home</button>
 </header>
 <main>
     <form id="generateForm">
         <div>
-            <label for="id">Video ID</label>
-            <input id="id" name="id" type="text" value="{{id}}"/>
+            <label for="videoId">Video ID</label>
+            <input id="videoId" name="id" type="text" value="{{id}}" />
         </div>
-        
-        
+
+
         <div id="generationStatus"></div>
     </form>
 </main>
 <footer>
-    <button>Generate</button>
-    <a class="button" href="/settings?return=/share-target/?text=https%3A%2F%2Fyoutube.com%3Fv%3D{{id}}">add title to this href</a>
-</footer> 
+    <button id="generate">Generate</button>
+    <a id="backButton" class="button"
+        href="/settings?return=/share-target/?text=https%3A%2F%2Fyoutube.com%3Fv%3D{{id}}&title={{title}}">Back</a>
+</footer>
 <script>
     const urlParams = new URLSearchParams(window.location.search);
+
     const title = urlParams.get("title");
     let generating = false;
-    document.getElementById("id").addEventListener("input",function(){
-        const id = this.value;
-        document.querySelector("a").href = "/settings?return=/share-target/?text=https%3A%2F%2Fyoutube.com%3Fv%3D"+id=`&title=${title}`;
-    })
-    document.getElementById("generateForm").addEventListener("submit",(e)=>{
+    document.getElementById("videoId").addEventListener("input", (e) => {
+        const id = e.target.value;
+        document.getElementById("backButton").href = "/settings?return=/share-target/?text=https%3A%2F%2Fyoutube.com%3Fv%3D"+id+"&title="+title;
+    });
+    alert(`generating 3: ${generating}`);
+    document.getElementById("generate").addEventListener("click", (e) => {
         e.preventDefault();
-        if (generating){
+        if (generating) {
             return;
         }
+        
         document.getElementById("generationStatus").textContent = "Generating recipe card...";
         generating = true;
-        fetch(`/api/youtube/withCookies?id=${document.getElementById("id").value}`,{
-            method:"GET"
+        fetch(`/api/youtube/withCookies?id=${document.getElementById("videoId").value}`, {
+            method: "GET"
         }).then(response => {
             if (response.ok) {
                 return response.json()
@@ -44,78 +47,90 @@
                 generating = false;
                 throw new Error("Failed to generate recipe card");
             }
-        }).then((json)=>{
+        }).then((json) => {
             const existing = localStorage.getItem("recipeCards") || "[]";
             const existingArray = JSON.parse(existing);
-            
+
             existingArray.push({
                 ...json,
-                title:title
+                title: title
             });
-            
+
             localStorage.setItem("recipeCards", JSON.stringify(existingArray));
             generating = false;
             document.getElementById("generationStatus").textContent = "Transferring you to recipe cards";
-            setTimeout(()=>{
+            setTimeout(() => {
                 window.location.replace("/")
-            },2000);
+            }, 2000);
         })
     });
 </script>
 <style>
-    body{
-        width:100vw;
-        height:100vh;
-        margin:0;
-        display:grid;
-        grid-template-rows:1fr 4fr 1fr;
-        background-color:white;
-    }
-    main{
-        width:100%;
-        height:100%;
-        overflow-y:auto;
-    }
-    form{
-        width:100%;
-        height:100%;
-        display:grid;
-        grid-template-rows:1fr 1fr;
-    }
-    form > div{
-        width:100%;
-        display:grid;
-        grid-template-columns: 1fr 2fr;
-    }
-    #generationStatus{
-        display:block;
-    }
-    label{
-        font-size:3em;
-    }
-    select,input,#generationStatus {
-        font-size:2em;
-    }
-    
-    header,footer{
-        width:100%;
-        height:100%;
-        display:grid;
-        
+    body {
+        width: 100vw;
+        height: 100vh;
+        margin: 0;
+        display: grid;
+        grid-template-rows: 1fr 4fr 1fr;
+        background-color: white;
     }
 
-    header{
-        grid-template-columns:1fr;
+    main {
+        width: 100%;
+        height: 100%;
+        overflow-y: auto;
     }
-    footer{
-        grid-template-columns:1fr 1fr;
+
+    form {
+        width: 100%;
+        height: 100%;
+        display: grid;
+        grid-template-rows: 1fr 1fr;
     }
-    .button{
+
+    form>div {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+    }
+
+    #generationStatus {
+        display: block;
+    }
+
+    label {
+        font-size: 3em;
+    }
+
+    select,
+    input,
+    #generationStatus {
+        font-size: 2em;
+    }
+
+    header,
+    footer {
+        width: 100%;
+        height: 100%;
+        display: grid;
+
+    }
+
+    header {
+        grid-template-columns: 1fr;
+    }
+
+    footer {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .button {
         display: inline-block;
         padding: 10px 20px;
         background-color: #007BFF;
         color: white;
-        text-decoration: none; underline;
+        text-decoration: none;
+        underline;
         border-radius: 5px;
         cursor: pointer;
         text-align: center;
@@ -123,27 +138,31 @@
         border: 2px solid black;
         font-family: serif;
     }
-    button{
+
+    button {
         display: inline-block;
         padding: 10px 20px;
         background-color: #007BFF;
         color: white;
-        text-decoration: none; underline
-        border-radius: 5px;
+        text-decoration: none;
+        underline border-radius: 5px;
         cursor: pointer;
         text-align: center;
         font-size: 10vw;
         border: 2px solid black;
         font-family: serif;
     }
-    .button:hover{
+
+    .button:hover {
         background-color: #0056b3;
-        
+
     }
-    button:hover{
+
+    button:hover {
         background-color: #0056b3;
     }
-    h1{
+
+    h1 {
         text-align: center;
     }
 </style>

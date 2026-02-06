@@ -112,15 +112,16 @@ app.get("/settings", async (c) => {
 });
 app.get("/share-target/", async (c) => {
   const url = c.req.query("text");
+  const title = c.req.query("title");
   let videoId;
-  if(url.includes("shorts")){
+  if(url!.includes("shorts")){
     videoId = new URL(url!).pathname.split("/")[2];
   } else{
     videoId = new URL(url!).searchParams.get("v");
   }
   //add failure condition
   
-  return c.html(await handle.renderView("pages/generate", { id: videoId }));
+  return c.html(await handle.renderView("pages/generate", { id: videoId,title }));
 });
 app.get(
   "/api/youtube/withParameters",
