@@ -34,6 +34,11 @@
             const existingArray = JSON.parse(existing);
             existingArray.push(json);
             localStorage.setItem("recipeCards", JSON.stringify(existingArray));
+            generating = false;
+            document.getElementById("generationStatus").textContent = "Transferring you to recipe cards";
+            setTimeout(()=>{
+                window.location.replace("/")
+            },2000);
         })
     });
 </script>

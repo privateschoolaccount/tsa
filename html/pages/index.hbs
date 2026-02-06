@@ -11,8 +11,12 @@
     <a href="settings" class="button">Settings</a>
 </footer> 
 <script>
-    var buttonLeft = document.getElementById("Left");
-    var buttonRight = document.getElementById("Right");
+    let currentRecipe = 0;
+    function changeRecipe(){
+        
+    }
+    const buttonLeft = document.getElementById("Left");
+    const buttonRight = document.getElementById("Right");
 
     buttonLeft.addEventListener("click", function() {
         if (recipe.textContent === "Hi") {

@@ -54,13 +54,14 @@ export async function createRecipeCard(text: string){
     return recipe;
 }
 export async function saveTextToTemp(text:string,folder:string,ext:string){
+    await Deno.mkdir(`./temp/${folder}`, { recursive: true });
     const path = `./temp/${folder}/${crypto.randomUUID()}.${ext}`
     await Deno.writeTextFile(path,text);
     return path;
 }
 export async function convertTextToBraille(text:string,table:string="en-ueb-g2.ctb",cellsPerLine:number=40,linesPerPage:number=25,formatFor:string="textDevice"){
     const textPath = await saveTextToTemp(text,"text","txt");
-
+    await Deno.mkdir(`./temp/brf`, { recursive: true });
     const braillePath = `./temp/brf/${crypto.randomUUID()}.brf`;
     await (new Deno.Command("file2brl",{
         args:[
