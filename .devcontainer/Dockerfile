@@ -11,11 +11,12 @@ RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
         ffmpeg \
         libavcodec-dev \
         python3 \
+        python3-pip \
         #yt-dlp \
         liblouis-bin \
         liblouisutdml-bin \
     # Clean up apt cache to save space
     && apt-get autoremove -y && apt-get clean -y && rm -rf /var/lib/apt/lists/*
-RUN python -m pip install -U --pre "yt-dlp[default]"
+RUN pip3 install -U --pre "yt-dlp[default]"
 # Install Deno
 RUN curl -fsSL https://deno.land/install.sh | sh -s -- --yes
