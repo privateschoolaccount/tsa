@@ -18,7 +18,7 @@ export async function getCaptionsYouTube(video: YoutubeVideo) {
             captionsPath,
             "--write-auto-sub",
             "--remote-components",
-            "ejs:github",
+            "ejs:npm",
             "--cookies",
             Deno.env.get("COOKIES")!,
             link

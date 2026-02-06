@@ -1,9 +1,42 @@
-<form action="/api/youtube" method="GET">
-    <label for="videoId">Video ID</label>
-    <input id="videoId" type="text"/>
-    <a href="/settings?return=%2Fshare-target%3Fid%3D{{id}}"><button role="button">Go to settings</button></a>
+<form id="generateForm">
+    <label for="id">Video ID</label>
+    <input id="id" name="id" type="text" value="{{id}}"/>
+    <a href="/settings?return=/share-target?link=https%3A%2F%2Fyoutube.com%3Fv%3D{{id}}"><button type="button">Go to settings</button></a>
+    <button>Generate Recipe Card</button>
+    <div id="generationStatus"></div>
 </form>
-
+<script>
+    let generating = false;
+    document.getElementById("id").addEventListener("input",function(){
+        const id = this.value;
+        document.querySelector("a").href = "/settings?return=/share-target?link=https%3A%2F%2Fyoutube.com%3Fv%3D"+id;
+    })
+    document.getElementById("generateForm").addEventListener("submit",(e)=>{
+        e.preventDefault();
+        if (generating){
+            return;
+        }
+        document.getElementById("generationStatus").textContent = "Generating recipe card...";
+        generating = true;
+        fetch(`/api/youtube/withCookies?id=${document.getElementById("id").value}`,{
+            method:"GET"
+        }).then(response => {
+            if (response.ok) {
+                return response.json()
+            } else {
+                console.log(response);
+                document.getElementById("generationStatus").textContent = "Failed to generate recipe card";
+                generating = false;
+                throw new Error("Failed to generate recipe card");
+            }
+        }).then((json)=>{
+            const existing = localStorage.getItem("recipeCards") || "[]";
+            const existingArray = JSON.parse(existing);
+            existingArray.push(json);
+            localStorage.setItem("recipeCards", JSON.stringify(existingArray));
+        })
+    });
+</script>
 <style>
     body{
         width:100vw;
