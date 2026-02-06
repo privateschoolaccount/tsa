@@ -9,25 +9,47 @@
     </p>
 </main>
 <footer>
-    <button>Share</button>
+    <button id="shareButton">Share</button>
     <a href="settings" class="button">Settings</a>
 </footer> 
 <script>
+    function canBrowserShareFiles() {
+        if (!navigator.share || !navigator.canShare) {
+            return false;
+        }
+
+        // Create some test data with a file, to check if the browser supports
+        // sharing it.
+        const testFile = new File(["foo"], "foo.txt", { type: "text/plain" });
+        const data = { files: [testFile] };
+
+        return navigator.canShare(data);
+    }
+
     let currentRecipe = 0;
     const recipes = JSON.parse(localStorage.getItem("recipeCards"));
     function changeRecipe(){
         
-        document.getElementById("recipeContent").textContent = recipes[currentRecipe].text;
+        document.getElementById("recipeContent").innerHTML = recipes[currentRecipe].text;
     }
     changeRecipe();
     const buttonLeft = document.getElementById("Left");
     const buttonRight = document.getElementById("Right");
-
+    const shareButton = document.getElementById("shareButton");
+    shareButton.addEventListener("click",()=>{
+        if(canBrowserShareFiles()){
+             navigator.share({
+                title: "My shared file",
+                files: [new File(new Blob([recipes[currentRecipe].text],{ type: "text/plain" }), "recipe.txt", { type: "text/plain" })],
+            });
+        }
+    })
     buttonLeft.addEventListener("click", function() {
         currentRecipe+=1;
         if(currentRecipe >= recipes.length-1){
             currentRecipe=0;
         }
+        changeRecipe();
     });
     
     buttonRight.addEventListener("click", function() {
@@ -35,7 +57,10 @@
         if(currentRecipe <= 0){
             currentRecipe=recipes.length-1;
         }
+        changeRecipe();
     });
+
+
 </script>
 <style>
     body{
