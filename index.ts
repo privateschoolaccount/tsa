@@ -110,10 +110,16 @@ app.get("/settings", async (c) => {
     }),
   );
 });
-app.get("/share-target", async (c) => {
-  const link = c.req.query("link");
+app.get("/share-target/", async (c) => {
+  const url = c.req.query("text");
+  let videoId;
+  if(url.includes("shorts")){
+    videoId = new URL(url!).pathname.split("/")[2];
+  } else{
+    videoId = new URL(url!).searchParams.get("v");
+  }
   //add failure condition
-  const videoId = new URL(link!).searchParams.get("v");
+  
   return c.html(await handle.renderView("pages/generate", { id: videoId }));
 });
 app.get(
@@ -199,4 +205,8 @@ app.get(
     url: "/openapi",
   }),
 );
+app.notFound((c) => {
+  console.log(`404 Not Found for URL: ${c.req.url}`); // Custom logging
+  return c.text('Custom 404 Message: Resource Not Found', 404); // Custom response
+});
 Deno.serve(app.fetch);
