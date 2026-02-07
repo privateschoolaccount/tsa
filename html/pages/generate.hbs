@@ -1,22 +1,22 @@
 
 <header>
-    <a class="button" id="home" href="/">Home</a>
+    <a class="button" id="home" href="/home" aria-label="Go home">Home</a>
 </header>
 <main id="mainContent">
     <form id="generateForm">
         <div>
             <label for="videoId">Video ID</label>
-            <input id="videoId" name="id" type="text" value="{{id}}" />
+            <input id="videoId" name="id" type="text" value="{{id}}" aria-label="Enter the YouTube video ID"/>
         </div>
 
 
-        <div id="generationStatus"></div>
+        <div id="generationStatus" aria-atomic="true" aria-live="polite"></div>
     </form>
 </main>
 <footer>
-    <button id="generate">Generate</button>
-    <a id="backButton" class="button"
-        href="/settings?return=/share-target/?text=https%3A%2F%2Fyoutube.com%3Fv%3D{{id}}&title={{title}}">Back</a>
+    <button id="generate" aria-label="Generate recipe card">Generate</button>
+    <a aria-label="Go to settings" id="backButton" class="button"
+        href="/settings?return=/share-target/?text=https%3A%2F%2Fyoutube.com%3Fv%3D{{id}}&title={{title}}">Settings</a>
 </footer>
 <script>
     const urlParams = new URLSearchParams(window.location.search);
@@ -33,7 +33,7 @@
         document.getElementById("mainContent").innerHTML = "<h1>No video ID provided</h1>";
         document.getElementById("generate").remove();
         document.getElementById("backButton").style.gridColumn = "1 / span 2";
-        document.getElementById("backButton").href="/";
+        document.getElementById("backButton").href="/home";
     }
     document.getElementById("generate").addEventListener("click", (e) => {
         e.preventDefault();
@@ -67,7 +67,7 @@
             generating = false;
             document.getElementById("generationStatus").textContent = "Transferring you to recipe cards";
             setTimeout(() => {
-                window.location.replace(`/?index=${existingArray.length - 1}`);
+                window.location.replace(`/home?index=${existingArray.length - 1}`);
             }, 2000);
         })
     });

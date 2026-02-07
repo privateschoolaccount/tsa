@@ -1,6 +1,7 @@
 {
   "short_name": "BC",
-  "start_url": "/",
+  "name": "Blind Cook",
+  "start_url": "/home",
   "icons": [
     {
       "src": "blindcook.png",

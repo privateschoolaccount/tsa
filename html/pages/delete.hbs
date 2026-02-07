@@ -1,14 +1,15 @@
 <header>
-    <button type="button" id="home">Home</button>
+    <a type="button" class="button" id="home" aria-label="Go home" href="/home">Home</a>
 </header>
 <main>
     <h1 id="deleteTitle">Delete recipe?</h1>
-    
+    <p>There's a yes and no button at the bottom</p>
+    <p>There's a home button at the top</p>
 </main>
 <footer>
-    <button id="deleteButton">Yes</button>
+    <button id="deleteButton" aria-label="Confirm to delete this recipe">Yes</button>
     <a id="backButton" class="button"
-        href="/">No</a>
+        href="/home" aria-label="Cancel and return to home">No</a>
 </footer>
 <script>
     const urlParams = new URLSearchParams(window.location.search);
@@ -17,6 +18,8 @@
     if(!urlParams.has("index") || existingArray.length == 0){
         document.getElementById("deleteTitle").textContent = "No recipe card found";
         document.getElementById("deleteButton").remove();
+
+        document.getElementById("backButton").ariaLabel = "Go back home";
         document.getElementById("backButton").innerHTML = "Back";
         document.getElementById("backButton").style.gridColumn = "1 / span 2";
 
@@ -27,13 +30,13 @@
     const title = urlParams.get("title");
     document.getElementById("deleteButton").addEventListener("click", () => {
         if(!urlParams.has("index")){
-            window.location.href = "/";
+            window.location.href = "/home";
             return;
         }
         
         existingArray.splice(urlParams.get("index"), 1);
         localStorage.setItem("recipeCards", JSON.stringify(existingArray));
-        window.location.href = "/";
+        window.location.href = "/home";
     });
 </script>
 <style>

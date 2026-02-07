@@ -1,0 +1,61 @@
+<header>
+    <a role="button" class="button" id="home" href="/home" aria-label="Go home">Home</a>
+</header>
+<main>
+    <h1>Select either text or braile buttons at the bottom to download</h1>
+    <h1>Click at the top to go home</h1>
+    
+</main>
+<footer>
+    <a class="button" id="textButton" download aria-label="Share text version">Text</a>
+    <a class="button" id="brailleButton" download aria-label="Share braille version">Braille</a>
+
+</footer>
+<style>
+    footer{
+        grid-template-columns: 1fr 1fr;
+    }
+</style>
+<script>
+    function canBrowserShareFiles() {
+        if (!navigator.share || !navigator.canShare) {
+            return false;
+        }
+
+        // Create some test data with a file, to check if the browser supports
+        // sharing it.
+        const testFile = new File(["foo"], "foo.txt", { type: "text/plain" });
+        const data = { files: [testFile] };
+
+        return navigator.canShare(data);
+    }
+    function shareStringAsFile(filename, content,mimeType="text/plain") {
+        const blob = new Blob([content], { type: mimeType });
+        const file = new File([blob], filename, { type: mimeType });
+
+        if (canBrowserShareFiles()) {
+            alert("Sharing file...");
+            navigator.share({
+                title: "Shared Recipe",
+                files: [file],
+            }).catch((err) => console.log("Error sharing:", err));
+        } else {
+            alert("Your browser does not support sharing files.");
+        }
+    }
+    const urlParams = new URLSearchParams(window.location.search);
+    const index = urlParams.get("index");
+    const recipeCards = JSON.parse(localStorage.getItem("recipeCards") || "[]");
+    document.getElementById("textButton").href = `data:text/plain;charset=utf-8,${encodeURIComponent(recipeCards[index].text)}`;
+    document.getElementById("textButton").download = `recipe-${recipeCards[index].title}.txt`;
+    document.getElementById("brailleButton").href = `data:application/octet-stream;charset=utf-8,${encodeURIComponent(recipeCards[index].braille)}`;
+    document.getElementById("brailleButton").download = `recipe-${recipeCards[index].title}.brf`;
+    
+    /*
+    document.getElementById("textButton").addEventListener("click",()=>{
+        shareStringAsFile(`recipe-${recipeCards[index].title}.txt`, recipeCards[index].text);
+    });
+    document.getElementById("brailleButton").addEventListener("click",()=>{
+        shareStringAsFile(`recipe-${recipeCards[index].title}.brf`, recipeCards[index].braille, "application/octet-stream");
+    });*/
+</script>

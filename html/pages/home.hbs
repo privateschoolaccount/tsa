@@ -1,0 +1,81 @@
+<header>
+    <button type="button" id="Left" aria-label="Previous recipe">Prev</button>
+    <button type="button" id="Right" aria-label="Next recipe">Next</button>
+</header>
+<main>
+    <h1 id="recipeName">Recipe</h1>
+    <h2 id="recipeNumber"></h2>
+    <p id="recipeContent"  role="status" aria-label="Recipe content is right here" aria-live="polite" aria-atomic="true">
+        
+    </p>
+</main>
+<footer>
+    <button aria-label="Delete recipe" id="deleteButton">Delete</button>
+    <button aria-label="Download recipe" id="downloadButton">Download</button>
+    <a aria-label="Settings" type="button" id="settingsButton" href="settings" class="button">Settings</a>
+</footer> 
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+
+    
+
+    let currentRecipe = Number(urlParams.get("index") || 0);
+    const recipes = JSON.parse(localStorage.getItem("recipeCards") || "[]");
+    if(recipes.length == 0){
+        document.getElementById("recipeName").textContent = "No recipe cards found";
+        document.getElementById("recipeContent").remove();
+        document.getElementById("recipeNumber").remove();
+
+    }
+    function changeRecipe(){
+        const recipe = recipes[currentRecipe];
+        const recipeText = recipe.text.split("\n").join("<br/>");
+        document.getElementById("recipeContent").innerHTML = recipeText;
+        document.getElementById("recipeName").innerHTML = `${recipe.title || "Untitled recipe"}`;
+        document.getElementById("recipeNumber").innerHTML = `${currentRecipe+1}/${recipes.length}`;
+        document.getElementById('recipeName').setAttribute('tabindex','-1');
+        document.getElementById('recipeName').focus();
+    }
+    changeRecipe();
+    const buttonLeft = document.getElementById("Left");
+    const buttonRight = document.getElementById("Right");
+    const downloadButton = document.getElementById("downloadButton");
+    const deleteButton = document.getElementById("deleteButton");
+    deleteButton.addEventListener("click",()=>{
+        window.location.href = `/delete?index=${currentRecipe}`;
+    });
+    downloadButton.addEventListener("click",()=>{
+        window.location.href = `/download?index=${currentRecipe}`;
+    })
+    buttonRight.addEventListener("click", function() {
+        currentRecipe+=1;
+        if(currentRecipe > recipes.length-1){
+            currentRecipe=0;
+        }
+        changeRecipe();
+    });
+    
+    buttonLeft.addEventListener("click", function() {
+        currentRecipe-=1;
+        if(currentRecipe < 0){
+            currentRecipe=recipes.length-1;
+        }
+        changeRecipe();
+    });
+
+
+</script>
+<style>
+    header{
+        grid-template-columns:1fr 1fr;
+    }
+    #downloadButton,#settingsButton,#deleteButton{
+        font-size:6vw;
+    }
+    footer{
+        grid-template-columns:1fr 1fr 1fr;
+    }
+    main{
+        overflow-y:auto;
+    }
+</style>

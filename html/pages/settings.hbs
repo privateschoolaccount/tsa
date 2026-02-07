@@ -1,19 +1,21 @@
 <header>
-    <div class="box">Settings</div>
+    <div class="box" aria-label="Settings header logo">Settings</div>
 </header>
 <main>
+    <div id ="disclaimer" aria-label="There's a settings form in this section and a back button to go home at the very bottom of the screen.">Read me with screen reader</div>
     <form id="settingsForm">
         <div>
             <label for="cellsPerLine">Cells per Line</label>
-            <input value="{{cellsPerLine}}" id="cellsPerLine" name="cellsPerLine" type="number"/> 
+            <input value="{{cellsPerLine}}" id="cellsPerLine" name="cellsPerLine" type="number" min="1" step="1" aria-required="true" aria-label="Amount of braile characters per line. Minimum 1"/> 
+
         </div>
         <div>
             <label for="linesPerPage">Lines per page</label>
-            <input value="{{linesPerPage}}" id="linesPerPage" name="linesPerPage" type="number"/>
+            <input value="{{linesPerPage}}" id="linesPerPage" name="linesPerPage" type="number" min="1" step="1" aria-required="true" aria-label="Amount of lines per page."/>
         </div>
         <div>
             <label for="table">Translation Table</label>
-            <select id="table" name="table">
+            <select id="table" name="table" aria-required="true" aria-label="Select braille translation table">
                 <option value="en-ueb-g2.ctb" {{#if (eq table "en-ueb-g2.ctb")}}selected{{/if}}>Grade 2 English</option>
                 <option value="en-ueb-g1.ctb" {{#if (eq table "en-ueb-g1.ctb")}}selected{{/if}}>Grade 1 English</option>
             </select>
@@ -23,7 +25,8 @@
 
 <footer>
     
-    <a href="{{#if return}} {{return}} {{else}} / {{/if}}" class="box">Back</a>
+    <a href="{{#if return}} {{return}} {{else}} /home {{/if}}" class="box">Back</a>
+    <a href="/" class="box">Frontpage</a>
 </footer>
 <script>
     for(const input of [...document.getElementsByTagName("select"),...document.getElementsByTagName("input")]){
@@ -35,67 +38,34 @@
     }
 </script>
 <style>
-    body{
-        width:100vw;
-        height:100vh;
-        margin:0;
-        display:grid;
-        grid-template-rows:1fr 4fr 1fr;
-        background-color:white;
+    .visually-hidden{
+        display:none;
     }
     main{
-        width:100%;
-        height:100%;
+        overflow-y: auto;
     }
     form{
-        width:100%;
+        width:100dvw;
         height:100%;
         display:grid;
         grid-template-rows:1fr 1fr 1fr 1fr;
     }
     form > div{
-        width:100%;
+        width:100dvw;
+        height:100%;
         display:grid;
-        grid-template-columns: 1fr 2fr;
+        justify-content: center;
+        align-items: center;
+        grid-template-columns: 1fr 2fr 0fr;
     }
     label{
-        font-size:3em;
+        font-size:3rem;
     }
     select,input {
-        font-size:2em;
+        height:100%;
+        font-size:2rem;
     }
     footer{
-        width;100%;
-        height:100%;
-        display:grid;
-        grid-template-columns:1fr;
-    }
-    header{
-        display:grid;
-        width:100%;
-        height:100%;
-        grid-template-columns:1fr;
-        grid-template-rows:1fr;
-    }
-    .box{
-        display: grid;
-        place-items:center;
-        justify-content: center;
-        padding: 10px 20px;
-        background-color: #007BFF;
-        color: white;
-        text-decoration: none;
-        border-radius: 5px;
-        text-align: center;
-        font-size: 10vw;
-        border: 2px solid black;
-        font-family: serif;
-    }
-    button.box:hover{
-        background-color: #0056b3;
-        
-    }
-    h1{
-        text-align: center
+        grid-template-columns:1fr 1fr;
     }
 </style>

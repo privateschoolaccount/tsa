@@ -91,6 +91,9 @@ app.use("*", defaultCookieMiddleware);
 app.get("/", async (c) => {
   return c.html(await handle.renderView("pages/index"));
 });
+app.get("/home", async (c) => {
+  return c.html(await handle.renderView("pages/home"));
+});
 app.get("/delete", async (c) => {
   return c.html(await handle.renderView("pages/delete"));
 });
@@ -112,6 +115,9 @@ app.get("/settings", async (c) => {
       "tableOptions": youtubeQuerySchema.shape.table.unwrap().options,
     }),
   );
+});
+app.get("/download",async(c)=>{
+  return c.html(await handle.renderView("pages/download"));
 });
 app.get("/share-target/", async (c) => {
   const url = c.req.query("text");
