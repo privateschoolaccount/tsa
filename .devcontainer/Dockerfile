@@ -1,5 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/base:ubuntu
-
+FROM denoland/deno:ubuntu
 # Combine into one layer to prevent "layer bloat"
 RUN apt-get update && export DEBIAN_FRONTEND=noninteractive \
     && apt-get install -y software-properties-common \
