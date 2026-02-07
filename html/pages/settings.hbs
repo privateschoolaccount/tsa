@@ -14,9 +14,8 @@
         <div>
             <label for="table">Translation Table</label>
             <select id="table" name="table">
-                {{#each tableOptions}}
-                    <option value="{{this}}" {{#if (eq this table)}}selected{{/if}}>{{this}}</option>
-                {{/each}}
+                <option value="en-ueb-g2.ctb" {{#if (eq table "en-ueb-g2.ctb")}}selected{{/if}}>Grade 2 English</option>
+                <option value="en-ueb-g1.ctb" {{#if (eq table "en-ueb-g1.ctb")}}selected{{/if}}>Grade 1 English</option>
             </select>
         </div>
     </form>

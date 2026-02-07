@@ -91,6 +91,9 @@ app.use("*", defaultCookieMiddleware);
 app.get("/", async (c) => {
   return c.html(await handle.renderView("pages/index"));
 });
+app.get("/delete", async (c) => {
+  return c.html(await handle.renderView("pages/delete"));
+});
 app.get("/settings", async (c) => {
   /*
   console.log("Rendering settings page with cookies:");

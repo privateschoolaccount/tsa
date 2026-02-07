@@ -1,0 +1,49 @@
+<header>
+    <button type="button" id="home">Home</button>
+</header>
+<main>
+    <h1 id="deleteTitle">Delete recipe?</h1>
+    
+</main>
+<footer>
+    <button id="deleteButton">Yes</button>
+    <a id="backButton" class="button"
+        href="/">No</a>
+</footer>
+<script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const existing = localStorage.getItem("recipeCards") || "[]";
+    const existingArray = JSON.parse(existing);
+    if(!urlParams.has("index") || existingArray.length == 0){
+        document.getElementById("deleteTitle").textContent = "No recipe card found";
+        document.getElementById("deleteButton").remove();
+        document.getElementById("backButton").innerHTML = "Back";
+        document.getElementById("backButton").style.gridColumn = "1 / span 2";
+
+    } else{
+        document.getElementById("deleteTitle").textContent = `Delete ${existingArray[urlParams.get("index")].title || "Untitled recipe"}?`;
+    }
+    const id = urlParams.get("id");
+    const title = urlParams.get("title");
+    document.getElementById("deleteButton").addEventListener("click", () => {
+        if(!urlParams.has("index")){
+            window.location.href = "/";
+            return;
+        }
+        
+        existingArray.splice(urlParams.get("index"), 1);
+        localStorage.setItem("recipeCards", JSON.stringify(existingArray));
+        window.location.href = "/";
+    });
+</script>
+<style>
+    main{
+        display:flex;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+    }
+    footer{
+        grid-template-columns:1fr 1fr;
+    }
+</style>

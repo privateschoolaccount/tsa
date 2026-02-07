@@ -1,8 +1,8 @@
 
 <header>
-    <button type="button" id="home">Home</button>
+    <a class="button" id="home" href="/">Home</a>
 </header>
-<main>
+<main id="mainContent">
     <form id="generateForm">
         <div>
             <label for="videoId">Video ID</label>
@@ -23,11 +23,18 @@
 
     const title = urlParams.get("title");
     let generating = false;
-    document.getElementById("videoId").addEventListener("input", (e) => {
+    const idInput = document.getElementById("videoId");
+    idInput.addEventListener("input", (e) => {
         const id = e.target.value;
         document.getElementById("backButton").href = "/settings?return=/share-target/?text=https%3A%2F%2Fyoutube.com%3Fv%3D"+id+"&title="+title;
     });
-    alert(`generating 3: ${generating}`);
+    if(idInput.value == ""){
+        document.getElementById("generateForm").remove();
+        document.getElementById("mainContent").innerHTML = "<h1>No video ID provided</h1>";
+        document.getElementById("generate").remove();
+        document.getElementById("backButton").style.gridColumn = "1 / span 2";
+        document.getElementById("backButton").href="/";
+    }
     document.getElementById("generate").addEventListener("click", (e) => {
         e.preventDefault();
         if (generating) {
@@ -60,26 +67,13 @@
             generating = false;
             document.getElementById("generationStatus").textContent = "Transferring you to recipe cards";
             setTimeout(() => {
-                window.location.replace("/")
+                window.location.replace(`/?index=${existingArray.length - 1}`);
             }, 2000);
         })
     });
 </script>
 <style>
-    body {
-        width: 100vw;
-        height: 100vh;
-        margin: 0;
-        display: grid;
-        grid-template-rows: 1fr 4fr 1fr;
-        background-color: white;
-    }
-
-    main {
-        width: 100%;
-        height: 100%;
-        overflow-y: auto;
-    }
+    
 
     form {
         width: 100%;
@@ -108,61 +102,11 @@
         font-size: 2em;
     }
 
-    header,
-    footer {
-        width: 100%;
-        height: 100%;
-        display: grid;
-
-    }
-
     header {
         grid-template-columns: 1fr;
     }
 
     footer {
         grid-template-columns: 1fr 1fr;
-    }
-
-    .button {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #007BFF;
-        color: white;
-        text-decoration: none;
-        underline;
-        border-radius: 5px;
-        cursor: pointer;
-        text-align: center;
-        font-size: 10vw;
-        border: 2px solid black;
-        font-family: serif;
-    }
-
-    button {
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #007BFF;
-        color: white;
-        text-decoration: none;
-        underline border-radius: 5px;
-        cursor: pointer;
-        text-align: center;
-        font-size: 10vw;
-        border: 2px solid black;
-        font-family: serif;
-    }
-
-    .button:hover {
-        background-color: #0056b3;
-
-    }
-
-    button:hover {
-        background-color: #0056b3;
-    }
-
-    h1 {
-        text-align: center;
     }
 </style>

@@ -11,10 +11,12 @@
 </main>
 <footer>
     <button id="deleteButton">Delete</button>
-    <a id="shareButton" class="button" href="/delete">Share</a>
+    <button id="shareButton">Share</button>
     <a href="settings" class="button">Settings</a>
 </footer> 
 <script>
+    const urlParams = new URLSearchParams(window.location.search);
+
     function canBrowserShareFiles() {
         if (!navigator.share || !navigator.canShare) {
             return false;
@@ -28,8 +30,14 @@
         return navigator.canShare(data);
     }
 
-    let currentRecipe = 0;
-    const recipes = JSON.parse(localStorage.getItem("recipeCards"));
+    let currentRecipe = Number(urlParams.get("index") || 0);
+    const recipes = JSON.parse(localStorage.getItem("recipeCards") || "[]");
+    if(recipes.length == 0){
+        document.getElementById("recipeName").textContent = "No recipe cards found";
+        document.getElementById("recipeContent").remove();
+        document.getElementById("recipeNumber").remove();
+
+    }
     function changeRecipe(){
         const recipe = recipes[currentRecipe];
         const recipeText = recipe.text.split("\n").join("<br/>");
@@ -41,25 +49,33 @@
     const buttonLeft = document.getElementById("Left");
     const buttonRight = document.getElementById("Right");
     const shareButton = document.getElementById("shareButton");
+    const deleteButton = document.getElementById("deleteButton");
+    deleteButton.addEventListener("click",()=>{
+        window.location.href = `/delete?index=${currentRecipe}`;
+    });
     shareButton.addEventListener("click",()=>{
+        alert("Sharing recipe...");
+        const blob = new Blob([recipes[currentRecipe].text],{ type: "text/plain" });
         if(canBrowserShareFiles()){
              navigator.share({
                 title: "My shared file",
-                files: [new File(new Blob([recipes[currentRecipe].text],{ type: "text/plain" }), "recipe.txt", { type: "text/plain" })],
-            });
+                files: [new File([blob], "recipe.txt", { type: "text/plain" })],
+            }).catch((err) => console.log("Error sharing:", err));
+        } else {
+            alert("Your browser does not support sharing files.");
         }
     })
-    buttonLeft.addEventListener("click", function() {
+    buttonRight.addEventListener("click", function() {
         currentRecipe+=1;
-        if(currentRecipe >= recipes.length-1){
+        if(currentRecipe > recipes.length-1){
             currentRecipe=0;
         }
         changeRecipe();
     });
     
-    buttonRight.addEventListener("click", function() {
+    buttonLeft.addEventListener("click", function() {
         currentRecipe-=1;
-        if(currentRecipe <= 0){
+        if(currentRecipe < 0){
             currentRecipe=recipes.length-1;
         }
         changeRecipe();
@@ -68,65 +84,13 @@
 
 </script>
 <style>
-    body{
-        width:100vw;
-        height:100vh;
-        margin:0;
-        display:grid;
-        grid-template-rows:1fr 4fr 1fr;
-        background-color:white;
-    }
-    main{
-        width:100%;
-        height:100%;
-        overflow-y:auto;
-    }
-    header,footer{
-        width:100%;
-        height:100%;
-        display:grid;
-        
-    }
     header{
         grid-template-columns:1fr 1fr;
     }
     footer{
         grid-template-columns:1fr 1fr 1fr;
     }
-    .button{
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #007BFF;
-        color: white;
-        text-decoration: none; underline;
-        border-radius: 5px;
-        cursor: pointer;
-        text-align: center;
-        font-size: 10vw;
-        border: 2px solid black;
-        font-family: serif;
-    }
-    button{
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #007BFF;
-        color: white;
-        text-decoration: none; underline
-        border-radius: 5px;
-        cursor: pointer;
-        text-align: center;
-        font-size: 10vw;
-        border: 2px solid black;
-        font-family: serif;
-    }
-    .button:hover{
-        background-color: #0056b3;
-        
-    }
-    button:hover{
-        background-color: #0056b3;
-    }
-    h1{
-        text-align: center;
+    main{
+        overflow-y:auto;
     }
 </style>
