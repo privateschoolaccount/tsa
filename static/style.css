@@ -8,6 +8,9 @@ body{
     grid-template-rows:1fr 4fr 1fr;
     background-color:white;
     position:fixed;
+    
+}
+*{
     font-family: "Recursive", sans-serif;
 }
 main{
