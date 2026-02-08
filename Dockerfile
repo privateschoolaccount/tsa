@@ -20,8 +20,8 @@ RUN python3 -m venv venv
 RUN ./venv/bin/pip3 install -U --pre "yt-dlp[default]"
 RUN ln -s "$(pwd)/venv/bin/yt-dlp" /usr/local/bin/yt-dlp
 # Install Deno
-RUN curl -fsSL https://deno.land/install.sh | sh -s -- --yes
-COPY . /app
-WORKDIR /app
+#RUN curl -fsSL https://deno.land/install.sh | sh -s -- --yes
+COPY . .
 EXPOSE 8000
+RUN deno install
 CMD ["deno", "run", "-A", "index.ts"]
