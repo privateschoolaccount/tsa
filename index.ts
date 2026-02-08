@@ -89,13 +89,13 @@ const defaultCookieMiddleware = createMiddleware(async (c, next) => {
 });
 app.use("*", defaultCookieMiddleware);
 app.get("/", async (c) => {
-  return c.html(await handle.renderView("pages/index"));
+  return c.html(await handle.renderView("pages/index",{title:"BlindCook"}));
 });
 app.get("/home", async (c) => {
-  return c.html(await handle.renderView("pages/home"));
+  return c.html(await handle.renderView("pages/home",{title:"BlindCook"}));
 });
 app.get("/delete", async (c) => {
-  return c.html(await handle.renderView("pages/delete"));
+  return c.html(await handle.renderView("pages/delete",{title:"BlindCook"}));
 });
 app.get("/settings", async (c) => {
   /*
@@ -117,7 +117,7 @@ app.get("/settings", async (c) => {
   );
 });
 app.get("/download",async(c)=>{
-  return c.html(await handle.renderView("pages/download"));
+  return c.html(await handle.renderView("pages/download",{title:"BlindCook"}));
 });
 app.get("/share-target/", async (c) => {
   const url = c.req.query("text");
