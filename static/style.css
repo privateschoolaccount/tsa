@@ -8,6 +8,7 @@ body{
     grid-template-rows:1fr 4fr 1fr;
     background-color:white;
     position:fixed;
+    font-family: "Recursive", sans-serif;
 }
 main{
     font-size:2rem;
@@ -30,7 +31,7 @@ button,.button,.box{
     place-items:center;
     justify-content: center;
     padding: 10px 20px;
-    background-color: #007BFF;
+    background-color: #838383;
     color: white;
     text-decoration: none;
     border-radius: 5px;
