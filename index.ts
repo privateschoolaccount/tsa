@@ -44,7 +44,7 @@ const youtubeResultSchema = z.object({
   text: z.string(),
 });
 const handle = new Handlebars({
-  baseDir: "./html",
+  baseDir: Deno.cwd()+"/html",
   layoutsDir: "layouts/",
   partialsDir: "partials/",
   extname: ".hbs",
