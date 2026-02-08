@@ -23,3 +23,5 @@ RUN ln -s "$(pwd)/venv/bin/yt-dlp" /usr/local/bin/yt-dlp
 RUN curl -fsSL https://deno.land/install.sh | sh -s -- --yes
 COPY . /app
 WORKDIR /app
+EXPOSE 8000
+CMD ["deno", "run", "-A", "index.ts"]
