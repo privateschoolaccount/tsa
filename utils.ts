@@ -2,7 +2,7 @@
 import { load as dotenv } from "jsr:@std/dotenv";
 import srtParser2 from "npm:srt-parser-2@1.2.3";
 import { GoogleGenAI } from 'npm:@google/genai@1.39.0';
-await dotenv({ envPath: ".env", export: true });
+//await dotenv({ envPath: ".env", export: true });
 
 
 

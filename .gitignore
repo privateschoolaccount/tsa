@@ -1,5 +1,5 @@
 temp
-.env
+**/*.env
 *.temp
 node_modules
 venv
