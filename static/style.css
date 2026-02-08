@@ -41,7 +41,6 @@ button,.button,.box{
     text-align: center;
     font-size: 10vw;
     border: 2px solid black;
-    font-family: serif;
 }
 button:hover,.button:hover,.box:hover{
     background-color: #0056b3;
