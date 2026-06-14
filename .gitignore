@@ -3,3 +3,5 @@ temp
 *.temp
 node_modules
 venv
+.env
+cookies.txt
